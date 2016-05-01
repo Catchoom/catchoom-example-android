@@ -49,9 +49,9 @@ public class ARProgrammaticallyActivity extends CraftARActivity implements Craft
 
 	private View mScanningLayout;
 
-	CraftARSDK mCraftARSDK;
-	CraftARTracking mTracking;
-	CraftARCloudRecognition mCloudIR;
+	private CraftARSDK mCraftARSDK;
+	private CraftARTracking mTracking;
+	private CraftARCloudRecognition mCloudIR;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

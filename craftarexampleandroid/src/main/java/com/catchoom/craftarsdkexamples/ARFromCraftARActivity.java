@@ -46,10 +46,10 @@ public class ARFromCraftARActivity extends CraftARActivity implements CraftARSea
 	private final String TAG = "ARFromCraftARActivity";
 
 	private View mScanningLayout;
-
-	CraftARSDK mCraftARSDK;
-	CraftARTracking mTracking;
-	CraftARCloudRecognition mCloudIR;
+    
+	private CraftARSDK mCraftARSDK;
+    private CraftARTracking mTracking;
+    private CraftARCloudRecognition mCloudIR;
 
 	@Override
 	public void onPostCreate() {
