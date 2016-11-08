@@ -40,12 +40,13 @@ import com.craftar.CraftARResult;
 import com.craftar.CraftARSDK;
 import com.craftar.CraftARSDKException;
 import com.craftar.CraftARSearchResponseHandler;
+import com.craftar.CraftARTouchEventInterface;
 import com.craftar.CraftARTracking;
 import com.craftar.ImageRecognition;
 
 public class ARProgrammaticallyActivity extends CraftARActivity implements CraftARSearchResponseHandler, ImageRecognition.SetCollectionListener {
 
-	private final String TAG = "ARProgrammaticallyActivity";
+	private final String TAG = "ARProgrammaticallyAct";
 
 	private View mScanningLayout;
 
@@ -90,7 +91,27 @@ public class ARProgrammaticallyActivity extends CraftARActivity implements Craft
 		 * SDK and manages the Single shot and the Finder mode searches.
 		 */
 		mCraftARSDK.setSearchController(mCloudIR.getSearchController());
+		mCraftARSDK.setOnContentTouchListener(new CraftARTouchEventInterface.OnTouchEventListener() {
+			@Override
+			public void onTouchIn(CraftARContent craftARContent) {
+				Log.d(TAG,"Touch in on: "+craftARContent.getUUID());
+			}
 
+			@Override
+			public void onTouchOut(CraftARContent craftARContent) {
+				Log.d(TAG,"Touch out on: "+craftARContent.getUUID());
+			}
+
+			@Override
+			public void onTouchDown(CraftARContent craftARContent) {
+				Log.d(TAG,"Touch down on: "+craftARContent.getUUID());
+			}
+
+			@Override
+			public void onTouchUp(CraftARContent craftARContent) {
+				Log.d(TAG,"Touch up: "+craftARContent.getUUID());
+			}
+		});
 		/**
 		 * Get the Tracking instance for the AR.
 		 */
