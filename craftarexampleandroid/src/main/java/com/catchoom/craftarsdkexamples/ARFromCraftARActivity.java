@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 import com.craftar.CraftARActivity;
 import com.craftar.CraftARCloudRecognition;
+import com.craftar.CraftARContentFactory;
 import com.craftar.CraftARError;
 import com.craftar.CraftARItem;
 import com.craftar.CraftARItemAR;
@@ -55,6 +56,11 @@ public class ARFromCraftARActivity extends CraftARActivity implements CraftARSea
 	public void onPostCreate() {
         View mainLayout = getLayoutInflater().inflate(R.layout.activity_ar_programmatically_ar_from_craftar, null);
         setContentView(mainLayout);
+
+        /**
+         * Set content factory to MyCraftARContentFactory
+         */
+        CraftARContentFactory.setFactory(new MyCraftARContentFactory());
 
         mScanningLayout = findViewById(R.id.layout_scanning);
 
