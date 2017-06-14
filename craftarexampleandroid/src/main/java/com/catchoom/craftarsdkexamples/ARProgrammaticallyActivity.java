@@ -42,8 +42,9 @@ import com.craftar.CraftARSDKException;
 import com.craftar.CraftARSearchResponseHandler;
 import com.craftar.CraftARTracking;
 import com.craftar.ImageRecognition;
+import com.craftar.SetCollectionListener;
 
-public class ARProgrammaticallyActivity extends CraftARActivity implements CraftARSearchResponseHandler, ImageRecognition.SetCollectionListener {
+public class ARProgrammaticallyActivity extends CraftARActivity implements CraftARSearchResponseHandler, SetCollectionListener {
 
 	private final String TAG = "ARProgrammaticallyActivity";
 

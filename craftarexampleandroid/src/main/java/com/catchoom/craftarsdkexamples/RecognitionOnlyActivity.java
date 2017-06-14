@@ -41,8 +41,9 @@ import com.craftar.CraftARSDK;
 import com.craftar.CraftARSearchResponseHandler;
 import com.craftar.CraftARTracking;
 import com.craftar.ImageRecognition;
+import com.craftar.SetCollectionListener;
 
-public class RecognitionOnlyActivity extends CraftARActivity implements CraftARSearchResponseHandler, ImageRecognition.SetCollectionListener, View.OnClickListener {
+public class RecognitionOnlyActivity extends CraftARActivity implements CraftARSearchResponseHandler, SetCollectionListener, View.OnClickListener {
 
 	private final String TAG = "RecognitionOnlyActivity";
 

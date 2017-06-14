@@ -78,32 +78,14 @@ public class OnDeviceARActivity extends CraftARActivity {
 
     @Override
     public void onPreviewStarted(int width,int height){
-
-        mCollection =  CraftAROnDeviceCollectionManager.Instance().get(Config.MY_COLLECTION_TOKEN);
         /**
          * As the on-device collection is already in the device (we did it in the Splash Screen), we will add the collection items
          * to the tracking and start the AR experience.
          */
-        loadCollection();
+        mTracking.startTracking();
  
     }
 
-    private void loadCollection() {
-        // Get all item UUIDs in the collection
-        for(String itemUUID: mCollection.listItems()){
-            // Get the item and check that it is an AR item
-            CraftARItem item = mCollection.getItem(itemUUID);
-            if(item.isAR()){
-                CraftARItemAR itemAR = (CraftARItemAR)item;
-                CraftARError error = mTracking.addItem(itemAR);
-                if (error != null) {
-                    showToast(error.getErrorMessage(), Toast.LENGTH_SHORT);
-                }
-            }
-        }
-        // Start tracking this collection.
-        mTracking.startTracking();
-    }
 
     private void showToast(String toastText, int toastDuration) {
         if (mToast != null) {
