@@ -23,6 +23,7 @@
 package com.catchoom.craftarsdkexamples;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -108,9 +109,8 @@ public class ARProgrammaticallyActivity extends CraftARActivity implements Craft
 		mCloudIR.setCollection(Config.MY_COLLECTION_TOKEN, this);
 	}
 
-
 	@Override
-	public void collectionReady() {
+	public void collectionReady(List<CraftARError> list) {
 		/**
 		 * Start searching in finder mode. The searchResults() method of the
 		 * CraftARSearchResponseHandler previously set to the SDK will be triggered when some results

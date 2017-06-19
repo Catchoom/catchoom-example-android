@@ -45,6 +45,8 @@ import com.craftar.CraftARTracking;
 import com.craftar.SetCollectionListener;
 import com.craftar.SetOnDeviceCollectionListener;
 
+import java.util.List;
+
 public class LaunchersActivity extends Activity implements OnClickListener {
 
 	@Override
@@ -168,7 +170,7 @@ public class LaunchersActivity extends Activity implements OnClickListener {
 			}
 
 			@Override
-			public void collectionReady() {
+			public void collectionReady(List<CraftARError> list) {
 				progressDialog.dismiss();
 				Intent playExampleIntent = new Intent(LaunchersActivity.this, OnDeviceARActivity.class);
 				startActivity(playExampleIntent);

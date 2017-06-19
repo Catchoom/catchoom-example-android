@@ -23,6 +23,7 @@
 package com.catchoom.craftarsdkexamples;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.util.Log;
 import android.view.View;
@@ -102,7 +103,7 @@ public class ARFromCraftARActivity extends CraftARActivity implements CraftARSea
     }
 
     @Override
-    public void collectionReady() {
+    public void collectionReady(List<CraftARError> list) {
         /**
          * Start searching in finder mode. The searchResults() method of the
          * CraftARSearchResponseHandler previously set to the SDK will be triggered when some results
