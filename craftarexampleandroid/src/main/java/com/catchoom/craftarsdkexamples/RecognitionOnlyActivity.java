@@ -89,6 +89,11 @@ public class RecognitionOnlyActivity extends CraftARActivity implements CraftARS
 
 	@Override
 	public void collectionReady(List<CraftARError> list) {
+		if (list != null) {
+			for (CraftARError error : list) {
+				Log.d(TAG, "Error setting collection: " + error.getErrorMessage());
+			}
+		}
 		mTapToScanLayout.setClickable(true);
 	}
 

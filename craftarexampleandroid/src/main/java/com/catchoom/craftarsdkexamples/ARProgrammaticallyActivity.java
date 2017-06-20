@@ -116,6 +116,11 @@ public class ARProgrammaticallyActivity extends CraftARActivity implements Craft
 		 * CraftARSearchResponseHandler previously set to the SDK will be triggered when some results
 		 * are found.
 		 */
+		if (list != null) {
+			for (CraftARError error : list) {
+				Log.d(TAG, "Error setting collection: " + error.getErrorMessage());
+			}
+		}
 		mCraftARSDK.startFinder();
 	}
 

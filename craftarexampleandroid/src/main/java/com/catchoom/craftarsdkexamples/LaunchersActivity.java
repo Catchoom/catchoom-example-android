@@ -26,6 +26,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -171,6 +172,11 @@ public class LaunchersActivity extends Activity implements OnClickListener {
 
 			@Override
 			public void collectionReady(List<CraftARError> list) {
+				if (list != null) {
+					for (CraftARError error : list) {
+						Log.d("LaunchersActivity", "Error setting collection: " + error.getErrorMessage());
+					}
+				}
 				progressDialog.dismiss();
 				Intent playExampleIntent = new Intent(LaunchersActivity.this, OnDeviceARActivity.class);
 				startActivity(playExampleIntent);
