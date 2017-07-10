@@ -42,9 +42,10 @@ import com.craftar.CraftARSDK;
 import com.craftar.CraftARSearchResponseHandler;
 import com.craftar.CraftARTracking;
 import com.craftar.ImageRecognition;
+import com.craftar.SetCloudCollectionListenner;
 import com.craftar.SetCollectionListener;
 
-public class RecognitionOnlyActivity extends CraftARActivity implements CraftARSearchResponseHandler, SetCollectionListener, View.OnClickListener {
+public class RecognitionOnlyActivity extends CraftARActivity implements CraftARSearchResponseHandler, SetCloudCollectionListenner, View.OnClickListener {
 
 	private final String TAG = "RecognitionOnlyActivity";
 
@@ -88,12 +89,7 @@ public class RecognitionOnlyActivity extends CraftARActivity implements CraftARS
 	
 
 	@Override
-	public void collectionReady(List<CraftARError> list) {
-		if (list != null) {
-			for (CraftARError error : list) {
-				Log.d(TAG, "Error setting collection: " + error.getErrorMessage());
-			}
-		}
+	public void collectionReady() {
 		mTapToScanLayout.setClickable(true);
 	}
 

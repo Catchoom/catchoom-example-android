@@ -43,9 +43,10 @@ import com.craftar.CraftARSDKException;
 import com.craftar.CraftARSearchResponseHandler;
 import com.craftar.CraftARTracking;
 import com.craftar.ImageRecognition;
+import com.craftar.SetCloudCollectionListenner;
 import com.craftar.SetCollectionListener;
 
-public class ARProgrammaticallyActivity extends CraftARActivity implements CraftARSearchResponseHandler, SetCollectionListener {
+public class ARProgrammaticallyActivity extends CraftARActivity implements CraftARSearchResponseHandler, SetCloudCollectionListenner {
 
 	private final String TAG = "ARProgrammaticallyActivity";
 
@@ -110,17 +111,7 @@ public class ARProgrammaticallyActivity extends CraftARActivity implements Craft
 	}
 
 	@Override
-	public void collectionReady(List<CraftARError> list) {
-		/**
-		 * Start searching in finder mode. The searchResults() method of the
-		 * CraftARSearchResponseHandler previously set to the SDK will be triggered when some results
-		 * are found.
-		 */
-		if (list != null) {
-			for (CraftARError error : list) {
-				Log.d(TAG, "Error setting collection: " + error.getErrorMessage());
-			}
-		}
+	public void collectionReady() {
 		mCraftARSDK.startFinder();
 	}
 
