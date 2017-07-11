@@ -23,6 +23,7 @@
 package com.catchoom.craftarsdkexamples;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -41,8 +42,10 @@ import com.craftar.CraftARSDK;
 import com.craftar.CraftARSearchResponseHandler;
 import com.craftar.CraftARTracking;
 import com.craftar.ImageRecognition;
+import com.craftar.SetCloudCollectionListenner;
+import com.craftar.SetCollectionListener;
 
-public class RecognitionOnlyActivity extends CraftARActivity implements CraftARSearchResponseHandler, ImageRecognition.SetCollectionListener, View.OnClickListener {
+public class RecognitionOnlyActivity extends CraftARActivity implements CraftARSearchResponseHandler, SetCloudCollectionListenner, View.OnClickListener {
 
 	private final String TAG = "RecognitionOnlyActivity";
 
@@ -83,12 +86,11 @@ public class RecognitionOnlyActivity extends CraftARActivity implements CraftARS
 		mCloudIR.setCollection(Config.MY_COLLECTION_TOKEN, this);
 		mCraftARSDK.setSearchController(mCloudIR.getSearchController());
 	}
-
+	
 
 	@Override
 	public void collectionReady() {
 		mTapToScanLayout.setClickable(true);
-
 	}
 
 	@Override

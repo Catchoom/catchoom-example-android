@@ -23,6 +23,7 @@
 package com.catchoom.craftarsdkexamples;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -42,8 +43,10 @@ import com.craftar.CraftARSDKException;
 import com.craftar.CraftARSearchResponseHandler;
 import com.craftar.CraftARTracking;
 import com.craftar.ImageRecognition;
+import com.craftar.SetCloudCollectionListenner;
+import com.craftar.SetCollectionListener;
 
-public class ARProgrammaticallyActivity extends CraftARActivity implements CraftARSearchResponseHandler, ImageRecognition.SetCollectionListener {
+public class ARProgrammaticallyActivity extends CraftARActivity implements CraftARSearchResponseHandler, SetCloudCollectionListenner {
 
 	private final String TAG = "ARProgrammaticallyActivity";
 
@@ -107,14 +110,8 @@ public class ARProgrammaticallyActivity extends CraftARActivity implements Craft
 		mCloudIR.setCollection(Config.MY_COLLECTION_TOKEN, this);
 	}
 
-
 	@Override
 	public void collectionReady() {
-		/**
-		 * Start searching in finder mode. The searchResults() method of the
-		 * CraftARSearchResponseHandler previously set to the SDK will be triggered when some results
-		 * are found.
-		 */
 		mCraftARSDK.startFinder();
 	}
 

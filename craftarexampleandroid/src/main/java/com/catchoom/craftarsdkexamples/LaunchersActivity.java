@@ -23,8 +23,10 @@
 package com.catchoom.craftarsdkexamples;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -32,6 +34,19 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.craftar.CraftARCloudRecognition;
+import com.craftar.CraftARError;
+import com.craftar.CraftARItem;
+import com.craftar.CraftARItemAR;
+import com.craftar.CraftAROnDeviceCollection;
+import com.craftar.CraftAROnDeviceCollectionManager;
+import com.craftar.CraftARTracking;
+import com.craftar.SetCollectionListener;
+import com.craftar.SetOnDeviceCollectionListener;
+
+import java.util.List;
 
 public class LaunchersActivity extends Activity implements OnClickListener {
 
@@ -107,8 +122,8 @@ public class LaunchersActivity extends Activity implements OnClickListener {
 				playExampleIntent = new Intent(this, RecognitionOnlyActivity.class);
 				break;
 			case R.id.play_on_device_ar:
-				playExampleIntent = new Intent(this, OnDeviceARActivity.class);
-				break;
+				loadOnDeviceARItemsAndLaunchActivity();
+				return;
 		}
 
 		if (playExampleIntent != null) {
@@ -136,4 +151,42 @@ public class LaunchersActivity extends Activity implements OnClickListener {
 			return;
 		}
 	}
+
+	private void loadOnDeviceARItemsAndLaunchActivity() {
+		final ProgressDialog progressDialog = new ProgressDialog(this);
+		progressDialog.setTitle("Loading AR collection");
+
+		progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		progressDialog.setIndeterminate(false);
+		progressDialog.setMax(100);
+		progressDialog.setProgress(0);
+		progressDialog.show();
+
+		CraftAROnDeviceCollection collection =  CraftAROnDeviceCollectionManager.Instance().get(Config.MY_COLLECTION_TOKEN);
+
+		CraftARTracking.Instance().setCollection(collection, new SetOnDeviceCollectionListener() {
+			@Override
+			public void setCollectionProgress(double v) {
+				progressDialog.setProgress((int)v);
+			}
+
+			@Override
+			public void collectionReady(List<CraftARError> list) {
+				if (list != null) {
+					for (CraftARError error : list) {
+						Log.d("LaunchersActivity", "Error setting collection: " + error.getErrorMessage());
+					}
+				}
+				progressDialog.dismiss();
+				Intent playExampleIntent = new Intent(LaunchersActivity.this, OnDeviceARActivity.class);
+				startActivity(playExampleIntent);
+			}
+
+			@Override
+			public void setCollectionFailed(CraftARError error) {
+				Toast.makeText(getApplicationContext(), error.getErrorMessage(), Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
 }
+
