@@ -42,10 +42,10 @@ import com.craftar.CraftARSDK;
 import com.craftar.CraftARSearchResponseHandler;
 import com.craftar.CraftARTracking;
 import com.craftar.ImageRecognition;
-import com.craftar.SetCloudCollectionListenner;
+import com.craftar.SetCloudCollectionListener;
 import com.craftar.SetCollectionListener;
 
-public class RecognitionOnlyActivity extends CraftARActivity implements CraftARSearchResponseHandler, SetCloudCollectionListenner, View.OnClickListener {
+public class RecognitionOnlyActivity extends CraftARActivity implements CraftARSearchResponseHandler, SetCloudCollectionListener, View.OnClickListener {
 
 	private final String TAG = "RecognitionOnlyActivity";
 
