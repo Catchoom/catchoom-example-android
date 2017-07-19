@@ -23,9 +23,14 @@
 package com.catchoom.craftarsdkexamples;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.PermissionChecker;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -114,12 +119,23 @@ public class LaunchersActivity extends Activity implements OnClickListener {
 				playExampleIntent = new Intent(this, RecognitionOnlyActivity.class);
 				break;
 			case R.id.play_on_device_ar:
-				loadOnDeviceARItemsAndLaunchActivity();
+				checkPermissionAndAskIfNotGranted(new Runnable() {
+					@Override
+					public void run() {
+						loadOnDeviceARItemsAndLaunchActivity();
+					}
+				});
 				return;
 		}
 
 		if (playExampleIntent != null) {
-			startActivity(playExampleIntent);
+			final Intent finalPlayExampleIntent = playExampleIntent;
+			checkPermissionAndAskIfNotGranted(new Runnable() {
+				@Override
+				public void run() {
+					startActivity(finalPlayExampleIntent);
+				}
+			});
 			return;
 		}
 
@@ -179,6 +195,64 @@ public class LaunchersActivity extends Activity implements OnClickListener {
 				Toast.makeText(getApplicationContext(), error.getErrorMessage(), Toast.LENGTH_SHORT).show();
 			}
 		});
+	}
+
+	private static final int CAMERA_PERMISSION = 0;
+
+	private Runnable doWhenGranted;
+
+	public void checkPermissionAndAskIfNotGranted(Runnable doWhenGranted) {
+		this.doWhenGranted = doWhenGranted;
+		if (PermissionChecker.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PermissionChecker.PERMISSION_GRANTED) {
+
+			// Should we show an explanation?
+			if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+					android.Manifest.permission.CAMERA)) {
+				showExplanation("Camera access", "This app needs to use the camera to demostrate the SDK's capabilities", android.Manifest.permission.CAMERA, CAMERA_PERMISSION);
+			} else {
+				requestPermission(android.Manifest.permission.CAMERA, CAMERA_PERMISSION);
+			}
+		} else {
+			doWhenGranted.run();
+		}
+	}
+
+	private void showExplanation(String title,
+								 String message,
+								 final String permission,
+								 final int permissionRequestCode) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(title)
+				.setMessage(message)
+				.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						requestPermission(permission, permissionRequestCode);
+					}
+				});
+		builder.create().show();
+	}
+
+	private void requestPermission(String permissionName, int permissionRequestCode) {
+		ActivityCompat.requestPermissions(this,
+				new String[]{permissionName}, permissionRequestCode);
+	}
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode,
+										   String permissions[], int[] grantResults) {
+		switch (requestCode) {
+			case CAMERA_PERMISSION: {
+				// If request is cancelled, the result arrays are empty.
+				if (grantResults.length > 0
+						&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					doWhenGranted.run();
+				} else {
+					Toast.makeText(getApplicationContext(), "Sorry, without camera permission, the examples will not work.", Toast.LENGTH_SHORT).show();
+				}
+				return;
+			}
+		}
+
 	}
 }
 
