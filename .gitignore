@@ -43,3 +43,4 @@ Thumbs.db
 craftarexampleandroid/.externalNativeBuild
 Examples.iml
 craftarexampleandroid/craftarexampleandroid.iml
+craftarexampleandroid/src/main/jniLibs
