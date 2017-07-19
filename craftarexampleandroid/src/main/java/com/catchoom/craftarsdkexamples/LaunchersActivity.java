@@ -30,20 +30,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.craftar.CraftARCloudRecognition;
 import com.craftar.CraftARError;
-import com.craftar.CraftARItem;
-import com.craftar.CraftARItemAR;
 import com.craftar.CraftAROnDeviceCollection;
 import com.craftar.CraftAROnDeviceCollectionManager;
 import com.craftar.CraftARTracking;
-import com.craftar.SetCollectionListener;
 import com.craftar.SetOnDeviceCollectionListener;
 
 import java.util.List;

@@ -23,18 +23,13 @@
 package com.catchoom.craftarsdkexamples;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.craftar.CraftARActivity;
-import com.craftar.CraftARError;
-import com.craftar.CraftARItem;
-import com.craftar.CraftARItemAR;
 import com.craftar.CraftAROnDeviceCollection;
 import com.craftar.CraftAROnDeviceCollectionManager;
 import com.craftar.CraftARSDK;
-import com.craftar.CraftARSDKException;
 import com.craftar.CraftARTracking;
 
 

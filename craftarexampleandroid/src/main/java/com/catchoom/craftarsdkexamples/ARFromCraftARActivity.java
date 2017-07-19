@@ -22,9 +22,6 @@
 
 package com.catchoom.craftarsdkexamples;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -36,12 +33,11 @@ import com.craftar.CraftARItem;
 import com.craftar.CraftARItemAR;
 import com.craftar.CraftARResult;
 import com.craftar.CraftARSDK;
-import com.craftar.CraftARSDKException;
 import com.craftar.CraftARSearchResponseHandler;
 import com.craftar.CraftARTracking;
-import com.craftar.ImageRecognition;
 import com.craftar.SetCloudCollectionListener;
-import com.craftar.SetCollectionListener;
+
+import java.util.ArrayList;
 
 
 public class ARFromCraftARActivity extends CraftARActivity implements CraftARSearchResponseHandler, SetCloudCollectionListener {
