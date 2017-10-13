@@ -27,6 +27,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.craftar.CraftARActivity;
+import com.craftar.CraftARActivityCompat;
 import com.craftar.CraftARCloudRecognition;
 import com.craftar.CraftARError;
 import com.craftar.CraftARItem;
@@ -40,7 +41,7 @@ import com.craftar.SetCloudCollectionListener;
 import java.util.ArrayList;
 
 
-public class ARFromCraftARActivity extends CraftARActivity implements CraftARSearchResponseHandler, SetCloudCollectionListener {
+public class ARFromCraftARActivity extends CraftARActivityCompat implements CraftARSearchResponseHandler, SetCloudCollectionListener {
 
 	private final String TAG = "ARFromCraftARActivity";
 
