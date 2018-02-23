@@ -63,8 +63,33 @@ public class SplashScreenActivity extends Activity implements AddCollectionListe
          */
 		CraftAROnDeviceCollection collection = collectionManager.get(Config.MY_COLLECTION_TOKEN);
 		if(collection != null){
-			Log.d(this.getClass().getSimpleName(), "Collection already added, starting launchers activity!");
-			startLaunchersActivity();
+			collection.sync(new CraftAROnDeviceCollectionManager.SyncCollectionListener() {
+				@Override
+				public void syncSuccessful(CraftAROnDeviceCollection craftAROnDeviceCollection) {
+
+					Log.d(this.getClass().getSimpleName(), "Collection synchronized!");
+					startLaunchersActivity();
+				}
+
+				@Override
+				public void syncFinishedWithErrors(CraftAROnDeviceCollection craftAROnDeviceCollection, CraftARError craftARError) {
+
+					Log.w(this.getClass().getSimpleName(), "Collection synchronized with errors: " + craftARError.getErrorMessage());
+					startLaunchersActivity();
+				}
+
+				@Override
+				public void syncProgress(CraftAROnDeviceCollection craftAROnDeviceCollection, float v) {
+					Log.d(this.getClass().getSimpleName(), "sync progress: " + v);
+					startLaunchersActivity();
+				}
+
+				@Override
+				public void syncFailed(CraftAROnDeviceCollection craftAROnDeviceCollection, CraftARError craftARError) {
+					Log.e(this.getClass().getSimpleName(), "sync error: " + craftARError.getErrorMessage());
+					startLaunchersActivity();
+				}
+			});
 
 		}else{
 			/**
