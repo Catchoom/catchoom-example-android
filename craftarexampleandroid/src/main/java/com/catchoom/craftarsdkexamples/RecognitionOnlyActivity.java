@@ -49,9 +49,9 @@ public class RecognitionOnlyActivity extends CraftARActivity implements CraftARS
 	private View mTapToScanLayout;
 
 
-	CraftARTracking mTracking;
-	CraftARSDK mCraftARSDK;
-	CraftARCloudRecognition mCloudIR;
+	private CraftARTracking mTracking;
+	private CraftARSDK mCraftARSDK;
+	private CraftARCloudRecognition mCloudIR;
 
 
 	@Override

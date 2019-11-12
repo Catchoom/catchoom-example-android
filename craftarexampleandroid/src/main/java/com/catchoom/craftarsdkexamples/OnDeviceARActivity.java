@@ -37,10 +37,10 @@ public class OnDeviceARActivity extends CraftARActivity {
 
 	private final String TAG = "OnDeviceARActivity";
 
-	CraftARTracking mTracking;
-	CraftARSDK mCraftARSDK;
-    CraftAROnDeviceCollectionManager mCollectionManager;
-    CraftAROnDeviceCollection mCollection;
+    private CraftARTracking mTracking;
+    private CraftARSDK mCraftARSDK;
+    private CraftAROnDeviceCollectionManager mCollectionManager;
+    private CraftAROnDeviceCollection mCollection;
     private Toast mToast;
     private View mScanningLayout;
 
